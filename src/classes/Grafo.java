@@ -104,4 +104,26 @@ public class Grafo {
         return v.getArestas().size();
     }
 
+    public Vertice[] verticesA(Aresta e) {
+        Vertice[] retorno = new Vertice[2];
+        retorno[0] = e.getV1();
+        retorno[1] = e.getV2();
+
+        return retorno;
+    }
+
+    public Vertice oposoto(Vertice v, Aresta e) {
+        if (v == e.getV1())
+            return e.getV1();
+
+        else if (v == e.getV2())
+            return e.getV2();
+        
+        return null;
+
+
+
+
+    }
+
 }
