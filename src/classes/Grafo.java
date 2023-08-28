@@ -68,15 +68,24 @@ public class Grafo {
 
     public void removeV (Vertice u) {
         
-        HashMap<Vertice, Aresta> arestas = u.getArestas();
         for (Vertice v: vertices) {
-            if (arestas.containsKey(v)){
-                arestas.remove(v);
+            if (v.getArestas().containsKey(u)){
+                v.getArestas().remove(u);
             }
         }
 
         vertices.remove(u);
 
+    }
+
+    public void removeA(Aresta e) {
+
+        for (Vertice v: vertices) {
+            if (v.getArestas().containsValue(e)){
+                v.getArestas().remove(e.getV2());
+                v.getArestas().remove(e.getV1());
+            }
+        }
     }
 
     public ArrayList<Vertice> adj(Vertice v) {
@@ -113,16 +122,13 @@ public class Grafo {
     }
 
     public Vertice oposoto(Vertice v, Aresta e) {
-        if (v == e.getV1())
+        if (v != e.getV1())
             return e.getV1();
 
-        else if (v == e.getV2())
+        else if (v != e.getV2())
             return e.getV2();
         
         return null;
-
-
-
 
     }
 

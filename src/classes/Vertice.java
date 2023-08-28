@@ -26,5 +26,10 @@ public class Vertice {
     public void setArestas(HashMap<Vertice, Aresta> arestas) {
         this.arestas = arestas;
     }
+
+    @Override
+    public String toString() {
+        return "[id=" + id + "]";
+    }
     
 }
