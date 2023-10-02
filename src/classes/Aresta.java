@@ -8,6 +8,8 @@ public class Aresta {
         this.v2 = v2;
         this.id = id;
     }
+    
+
 
     private int id;
     private Vertice v1;

@@ -27,7 +27,6 @@ public class Grafo {
             cont += v.getArestas().size();
         
         return cont/2;
-
     }
 
     public ArrayList<Vertice> vertices() {
