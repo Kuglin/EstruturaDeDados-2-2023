@@ -1,8 +1,11 @@
 package classes;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
+import java.util.Stack;
 
 public class Busca {
     
@@ -73,6 +76,57 @@ public class Busca {
         estado.put(v, 2);
 
         return p;
+    }
+
+     public ArrayList<Vertice> encontrarCicloEuleriano(Grafo g) {
+        HashMap<Vertice, Integer> grau = new HashMap<>();
+
+        for (Vertice v : g.vertices()) {
+            grau.put(v, 0);
+        }
+
+        for (Vertice v : g.vertices()) {
+            for (Vertice adj : g.adj(v)) {
+                grau.put(adj, grau.get(adj) + 1);
+            }
+        }
+
+        Stack<Vertice> pilha = new Stack<>();
+        ArrayList<Vertice> ciclo = new ArrayList<>();
+        Vertice verticeAtual = g.vertices().iterator().next();
+
+        pilha.push(verticeAtual);
+
+        while (!pilha.isEmpty()) {
+            if (grau.get(verticeAtual) > 0) {
+                pilha.push(verticeAtual);
+
+                Vertice proximo = null;
+                for (Vertice adj : g.adj(verticeAtual)) {
+                    if (grau.get(adj) > 0) {
+                        proximo = adj;
+                        break;
+                    }
+                }
+
+                grau.put(verticeAtual, grau.get(verticeAtual) - 1);
+                grau.put(proximo, grau.get(proximo) - 1);
+
+                verticeAtual = proximo;
+            } else {
+                ciclo.add(verticeAtual);
+
+                verticeAtual = pilha.pop();
+            }
+        }
+
+        for (Vertice v : g.vertices()) {
+            if (grau.get(v) > 0) {
+                return null;
+            }
+        }
+
+        return ciclo;
     }
 
 }
